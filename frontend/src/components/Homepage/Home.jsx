@@ -9,6 +9,7 @@ import {
 } from "react-icons/fa";
 import { useEffect, useRef, useState } from "react";
 
+// CountUp Component
 const CountUp = ({ target }) => {
   const [count, setCount] = useState(0);
   const ref = useRef();
@@ -51,7 +52,10 @@ const CountUp = ({ target }) => {
 };
 
 const Home = () => {
+  const [isOpen, setIsOpen] = useState(false); // mobile menu
+
   // Refs for smooth scroll
+  const homeRef = useRef(null);
   const aboutRef = useRef(null);
   const programsRef = useRef(null);
   const admissionsRef = useRef(null);
@@ -60,50 +64,50 @@ const Home = () => {
 
   const scrollToSection = (ref) => {
     ref.current?.scrollIntoView({ behavior: "smooth" });
+    setIsOpen(false);
   };
 
   return (
     <>
-      {/* Landing Page Section */}
-      <section className="p-5 w-full h-screen bg-gradient-to-r from-gray-700 via-gray-800 to-gray-900">
-        <div className="flex justify-between items-center w-full">
+      {/* Navbar */}
+      <nav className="w-full bg-gray-800 shadow-md fixed top-0 left-0 z-50">
+        <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
           <Link to={"/"} className="w-1/8">
             <img src={Logo} alt="Logo" className="w-[70%]" />
           </Link>
-          <ul className="flex justify-between items-center text-white font-medium w-[50%] px-14">
-            <div className="flex gap-8">
-              <button
-                onClick={() => scrollToSection(aboutRef)}
-                className="hover:text-gray-300 cursor-pointer"
-              >
-                About Us
-              </button>
-              <button
-                onClick={() => scrollToSection(programsRef)}
-                className="hover:text-gray-300 cursor-pointer"
-              >
-                Programs
-              </button>
-              <button
-                onClick={() => scrollToSection(admissionsRef)}
-                className="hover:text-gray-300 cursor-pointer"
-              >
-                Admissions
-              </button>
-              <button
-                onClick={() => scrollToSection(testimonialsRef)}
-                className="hover:text-gray-300 cursor-pointer"
-              >
-                Testimonials
-              </button>
-              <button
-                onClick={() => scrollToSection(contactsRef)}
-                className="hover:text-gray-300 cursor-pointer"
-              >
-                Contacts
-              </button>
-            </div>
 
+          {/* Desktop Menu */}
+          <ul className="hidden md:flex justify-between items-center text-white font-medium gap-8">
+            <button
+              onClick={() => scrollToSection(aboutRef)}
+              className="hover:text-gray-300 cursor-pointer"
+            >
+              About Us
+            </button>
+            <button
+              onClick={() => scrollToSection(programsRef)}
+              className="hover:text-gray-300 cursor-pointer"
+            >
+              Programs
+            </button>
+            <button
+              onClick={() => scrollToSection(admissionsRef)}
+              className="hover:text-gray-300 cursor-pointer"
+            >
+              Admissions
+            </button>
+            <button
+              onClick={() => scrollToSection(testimonialsRef)}
+              className="hover:text-gray-300 cursor-pointer"
+            >
+              Testimonials
+            </button>
+            <button
+              onClick={() => scrollToSection(contactsRef)}
+              className="hover:text-gray-300 cursor-pointer"
+            >
+              Contacts
+            </button>
             <Link
               to={"/login"}
               className="hover:text-gray-300 cursor-pointer flex items-center justify-center"
@@ -111,8 +115,63 @@ const Home = () => {
               <FaUserCircle className="text-[30px]" />
             </Link>
           </ul>
+
+          {/* Mobile Hamburger */}
+          <div className="md:hidden flex items-center">
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="text-white text-3xl focus:outline-none"
+            >
+              {isOpen ? "✖" : "☰"}
+            </button>
+          </div>
         </div>
 
+        {/* Mobile Menu */}
+        {isOpen && (
+          <ul className="md:hidden bg-gray-700 text-white font-medium flex flex-col items-center gap-6 py-6 animate-slideDown">
+            <button
+              onClick={() => scrollToSection(aboutRef)}
+              className="hover:text-gray-300 cursor-pointer"
+            >
+              About Us
+            </button>
+            <button
+              onClick={() => scrollToSection(programsRef)}
+              className="hover:text-gray-300 cursor-pointer"
+            >
+              Programs
+            </button>
+            <button
+              onClick={() => scrollToSection(admissionsRef)}
+              className="hover:text-gray-300 cursor-pointer"
+            >
+              Admissions
+            </button>
+            <button
+              onClick={() => scrollToSection(testimonialsRef)}
+              className="hover:text-gray-300 cursor-pointer"
+            >
+              Testimonials
+            </button>
+            <button
+              onClick={() => scrollToSection(contactsRef)}
+              className="hover:text-gray-300 cursor-pointer"
+            >
+              Contacts
+            </button>
+            <Link
+              to={"/login"}
+              className="hover:text-gray-300 flex items-center justify-center"
+            >
+              <FaUserCircle className="text-[30px]" />
+            </Link>
+          </ul>
+        )}
+      </nav>
+
+      {/* Landing Page Section */}
+      <section ref={homeRef} className="p-5 w-full h-screen bg-gradient-to-r from-gray-700 via-gray-800 to-gray-900 flex flex-col justify-center items-center mt-[80px]">
         <div className="text-center m-[8%] flex flex-col gap-5">
           <h1 className="text-5xl font-bold mb-4 text-white">
             Empowering Minds, Shaping Futures
@@ -144,7 +203,7 @@ const Home = () => {
       {/* About Us Section */}
       <section
         ref={aboutRef}
-        className="p-15 w-full bg-gradient-to-r from-gray-700 via-gray-800 to-gray-900 h-[150%]"
+        className="p-15 w-full bg-gradient-to-r from-gray-700 via-gray-800 to-gray-900"
       >
         <div className="max-w-6xl mx-auto px-6 text-center">
           <h2 className="text-5xl font-bold mb-6 text-white">About Us</h2>
@@ -220,30 +279,29 @@ const Home = () => {
       {/* Programs Section */}
       <section
         ref={programsRef}
-        className="p-9 w-full bg-gradient-to-r from-gray-700 via-gray-800 to-gray-900 h-screen"
+        className="p-9 w-full bg-gradient-to-r from-gray-700 via-gray-800 to-gray-900"
       >
         <div className="mt-12 max-w-6xl mx-auto text-center">
-          <h2 className="text-5xl font-bold mb-6 text-gray-900 text-white">
-            Our Programs
-          </h2>
+          <h2 className="text-5xl font-bold mb-6 text-white">Our Programs</h2>
           <p className="max-w-3xl mx-auto mb-12 text-lg text-gray-400">
             Explore our diverse academic offerings—from undergraduate to
             postgraduate studies—designed to prepare you for success in your
             chosen field.
           </p>
 
-          {/* Program Cards Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             <div className="bg-white p-6 rounded-lg shadow hover:shadow-lg transform hover:-translate-y-1 transition">
               <h3 className="text-xl font-bold mb-2">Computer Science</h3>
               <p className="text-gray-700 mb-4">
                 Learn software development, AI, and data science.
               </p>
-              <button className="text-blue-600 font-semibold hover:underline">
+              <Link
+                to={"/computer"}
+                className="text-blue-600 font-semibold hover:underline cursor-pointer"
+              >
                 Learn More
-              </button>
+              </Link>
             </div>
-
             <div className="bg-white p-6 rounded-lg shadow hover:shadow-lg transform hover:-translate-y-1 transition">
               <h3 className="text-xl font-bold mb-2">
                 Business Administration
@@ -251,11 +309,13 @@ const Home = () => {
               <p className="text-gray-700 mb-4">
                 Master management, finance, and entrepreneurship.
               </p>
-              <button className="text-blue-600 font-semibold hover:underline">
+              <Link
+                to={"/business"}
+                className="text-blue-600 font-semibold hover:underline cursor-pointer"
+              >
                 Learn More
-              </button>
+              </Link>
             </div>
-
             <div className="bg-white p-6 rounded-lg shadow hover:shadow-lg transform hover:-translate-y-1 transition">
               <h3 className="text-xl font-bold mb-2">
                 Medicine & Health Sciences
@@ -263,40 +323,49 @@ const Home = () => {
               <p className="text-gray-700 mb-4">
                 Prepare for careers in healthcare and research.
               </p>
-              <button className="text-blue-600 font-semibold hover:underline">
+              <Link
+                to={"/medicine"}
+                className="text-blue-600 font-semibold hover:underline cursor-pointer"
+              >
                 Learn More
-              </button>
+              </Link>
             </div>
-
             <div className="bg-white p-6 rounded-lg shadow hover:shadow-lg transform hover:-translate-y-1 transition">
               <h3 className="text-xl font-bold mb-2">Arts & Humanities</h3>
               <p className="text-gray-700 mb-4">
                 Explore literature, history, and creative disciplines.
               </p>
-              <button className="text-blue-600 font-semibold hover:underline">
+              <Link
+                to={"/art"}
+                className="text-blue-600 font-semibold hover:underline cursor-pointer"
+              >
                 Learn More
-              </button>
+              </Link>
             </div>
-
             <div className="bg-white p-6 rounded-lg shadow hover:shadow-lg transform hover:-translate-y-1 transition">
               <h3 className="text-xl font-bold mb-2">Engineering</h3>
               <p className="text-gray-700 mb-4">
                 Innovate and design practical solutions to real-world problems.
               </p>
-              <button className="text-blue-600 font-semibold hover:underline">
+              <Link
+                to={"/engineering"}
+                className="text-blue-600 font-semibold hover:underline cursor-pointer"
+              >
                 Learn More
-              </button>
+              </Link>
             </div>
-
             <div className="bg-white p-6 rounded-lg shadow hover:shadow-lg transform hover:-translate-y-1 transition">
               <h3 className="text-xl font-bold mb-2">Piloting</h3>
               <p className="text-gray-700 mb-4">
                 Train to become a professional pilot with hands-on flight
                 experience.
               </p>
-              <button className="text-blue-600 font-semibold hover:underline">
+              <Link
+                to={"/piloting"}
+                className="text-blue-600 font-semibold hover:underline cursor-pointer"
+              >
                 Learn More
-              </button>
+              </Link>
             </div>
           </div>
         </div>
@@ -332,7 +401,6 @@ const Home = () => {
                 Apply Now
               </button>
             </div>
-
             <div className="bg-white p-8 rounded-lg shadow hover:shadow-lg transform hover:-translate-y-1 transition">
               <h3 className="text-2xl font-bold mb-4">Postgraduate Programs</h3>
               <p className="text-gray-700 mb-6">
@@ -376,11 +444,11 @@ const Home = () => {
             </div>
             <div className="bg-white p-6 rounded-lg shadow text-center">
               <h4 className="text-xl font-bold mb-2 text-blue-600">
-                4. Receive Decision
+                4. Admission Decision
               </h4>
               <p>
-                Check your admission status and next steps to join Sunrise
-                University.
+                Receive your acceptance letter and start planning your academic
+                journey.
               </p>
             </div>
           </div>
@@ -393,131 +461,38 @@ const Home = () => {
       {/* Testimonials Section */}
       <section
         ref={testimonialsRef}
-        className="p-12 w-full h-screen bg-gradient-to-r from-gray-700 via-gray-800 to-gray-900"
+        className="p-12 w-full bg-gradient-to-r from-gray-700 via-gray-800 to-gray-900"
       >
-        <div className="max-w-6xl mx-auto text-center mt-[3%]">
-          <h2 className="text-5xl font-bold mb-6 text-white mb-[4%]">
+        <div className="max-w-6xl mx-auto text-center">
+          <h2 className="text-5xl font-bold mb-12 text-white">
             What Our Students Say
           </h2>
-          <p className="max-w-2xl mx-auto mb-12 text-[25px] text-gray-400 mb-[8%]">
-            Hear from our students and alumni about their experiences at Sunrise
-            University.
-          </p>
-
-          <div className="flex gap-6 overflow-x-auto pb-6 snap-x snap-mandatory hide-scrollbar">
-            {/* Testimonial 1 */}
-            <div className="bg-white p-8 rounded-lg shadow min-w-[300px] snap-start flex-shrink-0">
-              <p className="text-gray-700 italic mb-4">
-                “Sunrise University gave me the tools and confidence to excel in
-                my career. The faculty are amazing!”
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="bg-white p-6 rounded-lg shadow hover:shadow-lg transition">
+              <p className="text-gray-700 mb-4">
+                "Sunrise University gave me the skills and confidence to succeed
+                in my career. The professors are amazing!"
               </p>
-              <div className="flex items-center gap-3 mt-4">
-                <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold">
-                  S
-                </div>
-                <div className="text-left">
-                  <p className="font-semibold text-gray-900">Sarah K.</p>
-                  <p className="text-gray-500 text-sm">
-                    Computer Science, Class of 2023
-                  </p>
-                </div>
-              </div>
+              <h4 className="font-bold">– Alex Johnson</h4>
+              <p className="text-gray-500 text-sm">Computer Science Graduate</p>
             </div>
-
-            {/* Testimonial 2 */}
-            <div className="bg-white p-8 rounded-lg shadow min-w-[300px] snap-start flex-shrink-0">
-              <p className="text-gray-700 italic mb-4">
-                “The hands-on learning and research opportunities prepared me
-                for real-world challenges.”
+            <div className="bg-white p-6 rounded-lg shadow hover:shadow-lg transition">
+              <p className="text-gray-700 mb-4">
+                "The learning environment is supportive and inspiring. I loved
+                the practical experience I gained here."
               </p>
-              <div className="flex items-center gap-3 mt-4">
-                <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold">
-                  J
-                </div>
-                <div className="text-left">
-                  <p className="font-semibold text-gray-900">James M.</p>
-                  <p className="text-gray-500 text-sm">
-                    Engineering, Class of 2022
-                  </p>
-                </div>
-              </div>
+              <h4 className="font-bold">– Maria Lopez</h4>
+              <p className="text-gray-500 text-sm">
+                Business Administration Graduate
+              </p>
             </div>
-
-            {/* Testimonial 3 */}
-            <div className="bg-white p-8 rounded-lg shadow min-w-[300px] snap-start flex-shrink-0">
-              <p className="text-gray-700 italic mb-4">
-                “The supportive community and innovative programs made my
-                university experience unforgettable.”
+            <div className="bg-white p-6 rounded-lg shadow hover:shadow-lg transition">
+              <p className="text-gray-700 mb-4">
+                "I highly recommend Sunrise to anyone looking to excel
+                academically and personally. Truly life-changing."
               </p>
-              <div className="flex items-center gap-3 mt-4">
-                <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold">
-                  L
-                </div>
-                <div className="text-left">
-                  <p className="font-semibold text-gray-900">Lily R.</p>
-                  <p className="text-gray-500 text-sm">
-                    Business Administration, Class of 2023
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Testimonial 4 */}
-            <div className="bg-white p-8 rounded-lg shadow min-w-[300px] snap-start flex-shrink-0">
-              <p className="text-gray-700 italic mb-4">
-                “Thanks to Sunrise University, I landed my dream job right after
-                graduation. The practical skills I gained were invaluable.”
-              </p>
-              <div className="flex items-center gap-3 mt-4">
-                <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold">
-                  M
-                </div>
-                <div className="text-left">
-                  <p className="font-semibold text-gray-900">Michael T.</p>
-                  <p className="text-gray-500 text-sm">
-                    Engineering, Class of 2021
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Testimonial 5 */}
-            <div className="bg-white p-8 rounded-lg shadow min-w-[300px] snap-start flex-shrink-0">
-              <p className="text-gray-700 italic mb-4">
-                “The professors were always supportive, and the research
-                opportunities allowed me to publish my first paper as an
-                undergrad.”
-              </p>
-              <div className="flex items-center gap-3 mt-4">
-                <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold">
-                  A
-                </div>
-                <div className="text-left">
-                  <p className="font-semibold text-gray-900">Aisha N.</p>
-                  <p className="text-gray-500 text-sm">
-                    Computer Science, Class of 2022
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Testimonial 6 */}
-            <div className="bg-white p-8 rounded-lg shadow min-w-[300px] snap-start flex-shrink-0">
-              <p className="text-gray-700 italic mb-4">
-                “I loved the inclusive environment and the student clubs.
-                Sunrise University truly feels like a second home.”
-              </p>
-              <div className="flex items-center gap-3 mt-4">
-                <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold">
-                  R
-                </div>
-                <div className="text-left">
-                  <p className="font-semibold text-gray-900">Rohan S.</p>
-                  <p className="text-gray-500 text-sm">
-                    Medicine, Class of 2023
-                  </p>
-                </div>
-              </div>
+              <h4 className="font-bold">– Daniel Kim</h4>
+              <p className="text-gray-500 text-sm">Medicine Graduate</p>
             </div>
           </div>
         </div>
@@ -531,152 +506,98 @@ const Home = () => {
         ref={contactsRef}
         className="p-12 w-full bg-gradient-to-r from-gray-700 via-gray-800 to-gray-900"
       >
-        <div className="max-w-7xl mx-auto text-center">
-          <h2 className="text-white text-5xl font-extrabold mb-4">
-            Contact Us
-          </h2>
-          <p className="max-w-3xl mx-auto mb-12 text-lg text-gray-300">
-            Have questions or need assistance? Reach out to our team and we'll
-            get back to you as soon as possible.
-          </p>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-16">
-            <div className="bg-gray-200 p-10 rounded-2xl shadow-xl hover:shadow-2xl transition transform hover:-translate-y-2">
-              <h3 className="text-2xl font-bold mb-4 text-gray-900">
-                Mohamed Mansour
-              </h3>
-              <p className="text-gray-700 mb-2">
-                <strong>Email:</strong>{" "}
-                <a
-                  href="mailto:mm7.mansour@gmail.com"
-                  className="text-blue-600 hover:underline"
-                >
-                  mm7.mansour@gmail.com
-                </a>
+        <div className="max-w-6xl mx-auto text-center">
+          <h2 className="text-5xl font-bold mb-12 text-white">Contact Us</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+            <div className="text-left text-gray-300 space-y-4">
+              <p>
+                <span className="font-bold">Address:</span> Kigali, Gasabo kg #91
               </p>
-              <p className="text-gray-700 mb-2">
-                <strong>Phone:</strong>{" "}
-                <a
-                  href="tel:+250786003839"
-                  className="text-blue-600 hover:underline"
-                >
-                  +250 786 003 839
-                </a>
+              <p>
+                <span className="font-bold">Phone:</span> +250 786 003 839
               </p>
-              <p className="text-gray-700">
-                <strong>Address:</strong> Kigali, Kg #91
+              <p>
+                <span className="font-bold">Email:</span>{" "}
+                info@sunriseuniversity.edu
               </p>
+              <div className="flex gap-4 mt-4">
+                <FaFacebookF className="text-white cursor-pointer hover:text-blue-600" />
+                <FaTwitter className="text-white cursor-pointer hover:text-blue-400" />
+                <FaInstagram className="text-white cursor-pointer hover:text-pink-500" />
+                <FaLinkedinIn className="text-white cursor-pointer hover:text-blue-700" />
+              </div>
             </div>
-
-            <div className="bg-gray-200 p-10 rounded-2xl shadow-xl hover:shadow-2xl transition transform hover:-translate-y-2">
-              <h3 className="text-2xl font-bold mb-4 text-gray-900">
-                Yassin Tresor
-              </h3>
-              <p className="text-gray-700 mb-2">
-                <strong>Email:</strong>{" "}
-                <a
-                  href="mailto:tresoryassin221@gmail.com"
-                  className="text-blue-600 hover:underline"
-                >
-                  tresoryassin221@gmail.com
-                </a>
-              </p>
-              <p className="text-gray-700 mb-2">
-                <strong>Phone:</strong>{" "}
-                <a
-                  href="tel:+250798200559"
-                  className="text-blue-600 hover:underline"
-                >
-                  +250 798 200 559
-                </a>
-              </p>
-              <p className="text-gray-700">
-                <strong>Address:</strong> Kigali, Kg #91
-              </p>
+            <div>
+              <form className="bg-white p-8 rounded-lg shadow space-y-4">
+                <input
+                  type="text"
+                  placeholder="Full Name"
+                  className="w-full border border-gray-400 rounded px-4 py-2 focus:outline-none focus:border-blue-600"
+                />
+                <input
+                  type="email"
+                  placeholder="Email"
+                  className="w-full border border-gray-400 rounded px-4 py-2 focus:outline-none focus:border-blue-600"
+                />
+                <textarea
+                  placeholder="Message"
+                  className="w-full border border-gray-400 rounded px-4 py-2 focus:outline-none focus:border-blue-600"
+                ></textarea>
+                <button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-3 rounded-md transition">
+                  Send Message
+                </button>
+              </form>
             </div>
-          </div>
-
-          <div className="bg-gray-200 p-12 rounded-2xl shadow-xl max-w-3xl mx-auto">
-            <h3 className="text-3xl font-bold mb-6 text-gray-900">
-              Send Us a Message
-            </h3>
-            <form action="#" className="flex flex-col gap-5">
-              <input
-                type="text"
-                placeholder="Your Name"
-                className="border border-gray-300 p-4 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-              <input
-                type="email"
-                placeholder="Your Email"
-                className="border border-gray-300 p-4 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-              <textarea
-                placeholder="Your Message"
-                rows="6"
-                className="border border-gray-300 p-4 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
-              ></textarea>
-              <button
-                type="submit"
-                className="bg-blue-600 hover:bg-blue-700 text-white font-bold px-8 py-4 rounded-xl transition transform hover:-translate-y-1"
-              >
-                Send Message
-              </button>
-            </form>
           </div>
         </div>
       </section>
 
-      {/* Footer Section */}
-      <section className="w-full bg-gray-900 text-gray-300 p-12">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between gap-8">
+      {/* Footer */}
+      <footer className="w-full bg-gray-900 text-gray-300 p-12">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-[20%]">
+          <button className="cursor-pointer" onClick={() => scrollToSection(homeRef)}>
+            <img src={Logo} width={'50%'} alt="" />
+          </button>
           <div>
-            <h3 className="text-xl font-bold mb-4 text-white">Contact Info</h3>
-            <p className="mb-2">📍 Address: Kigali, Kg #91</p>
-            <p className="mb-2">
-              📧 Email:{" "}
-              <a
-                href="#"
-                className="text-blue-500 hover:underline"
+            <h4 className="font-bold text-lg mb-4">Quick Links</h4>
+            <ul className="space-y-2">
+              <li
+                className="hover:text-white cursor-pointer"
+                onClick={() => scrollToSection(aboutRef)}
               >
-                info@sunriseuniversity.com
-              </a>
-            </p>
-            <p className="mb-2">
-              📞 Phone:{" "}
-              <a
-                href="#"
-                className="text-blue-500 hover:underline"
+                About Us
+              </li>
+              <li
+                className="hover:text-white cursor-pointer"
+                onClick={() => scrollToSection(programsRef)}
               >
-                +250 786 003 839
-              </a>
-            </p>
+                Programs
+              </li>
+              <li
+                className="hover:text-white cursor-pointer"
+                onClick={() => scrollToSection(admissionsRef)}
+              >
+                Admissions
+              </li>
+              <li
+                className="hover:text-white cursor-pointer"
+                onClick={() => scrollToSection(contactsRef)}
+              >
+                Contact
+              </li>
+            </ul>
           </div>
           <div>
-            <h3 className="text-xl font-bold mb-4 text-white">Follow Us</h3>
-            <div className="flex gap-4 text-2xl">
-              <a href="#" className="hover:text-blue-500 transition">
-                <FaFacebookF />
-              </a>
-              <a href="#" className="hover:text-blue-400 transition">
-                <FaTwitter />
-              </a>
-              <a href="#" className="hover:text-pink-500 transition">
-                <FaInstagram />
-              </a>
-              <a href="#" className="hover:text-blue-600 transition">
-                <FaLinkedinIn />
-              </a>
-            </div>
+            <h4 className="font-bold text-lg mb-4">Contact Info</h4>
+            <p>Email: info@sunriseuniversity.edu</p>
+            <p>Phone: +250 786 003 839</p>
+            <p>Address: Kigali, Gasabo kg #91</p>
           </div>
         </div>
-        <div className="border-t border-gray-700 mt-8 pt-6 text-center">
-          <p>
-            © {new Date().getFullYear()} All Rights Reserved by{" "}
-            <span className="font-bold">@MohaYassinDev</span>
-          </p>
+        <div className="mt-12 text-center text-gray-500">
+          &copy; 2025 Sunrise University. All rights reserved.
         </div>
-      </section>
+      </footer>
     </>
   );
 };
