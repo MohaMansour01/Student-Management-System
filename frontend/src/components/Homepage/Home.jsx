@@ -239,9 +239,9 @@ const Home = () => {
               <p className="text-gray-700 mb-4">
                 Learn software development, AI, and data science.
               </p>
-              <button className="text-blue-600 font-semibold hover:underline">
+              <Link to="/programs/computer-science" className="text-blue-600 font-semibold hover:underline">
                 Learn More
-              </button>
+              </Link>
             </div>
 
             <div className="bg-white p-6 rounded-lg shadow hover:shadow-lg transform hover:-translate-y-1 transition">
@@ -251,9 +251,9 @@ const Home = () => {
               <p className="text-gray-700 mb-4">
                 Master management, finance, and entrepreneurship.
               </p>
-              <button className="text-blue-600 font-semibold hover:underline">
+              <Link to="/programs/business-administration" className="text-blue-600 font-semibold hover:underline">
                 Learn More
-              </button>
+              </Link>
             </div>
 
             <div className="bg-white p-6 rounded-lg shadow hover:shadow-lg transform hover:-translate-y-1 transition">
@@ -263,9 +263,9 @@ const Home = () => {
               <p className="text-gray-700 mb-4">
                 Prepare for careers in healthcare and research.
               </p>
-              <button className="text-blue-600 font-semibold hover:underline">
+              <Link to="/programs/medicine-health-sciences" className="text-blue-600 font-semibold hover:underline">
                 Learn More
-              </button>
+              </Link>
             </div>
 
             <div className="bg-white p-6 rounded-lg shadow hover:shadow-lg transform hover:-translate-y-1 transition">
@@ -273,9 +273,9 @@ const Home = () => {
               <p className="text-gray-700 mb-4">
                 Explore literature, history, and creative disciplines.
               </p>
-              <button className="text-blue-600 font-semibold hover:underline">
+              <Link to="/programs/arts-humanities" className="text-blue-600 font-semibold hover:underline">
                 Learn More
-              </button>
+              </Link>
             </div>
 
             <div className="bg-white p-6 rounded-lg shadow hover:shadow-lg transform hover:-translate-y-1 transition">
@@ -283,9 +283,9 @@ const Home = () => {
               <p className="text-gray-700 mb-4">
                 Innovate and design practical solutions to real-world problems.
               </p>
-              <button className="text-blue-600 font-semibold hover:underline">
+              <Link to="/programs/engineering" className="text-blue-600 font-semibold hover:underline">
                 Learn More
-              </button>
+              </Link>
             </div>
 
             <div className="bg-white p-6 rounded-lg shadow hover:shadow-lg transform hover:-translate-y-1 transition">
@@ -294,9 +294,9 @@ const Home = () => {
                 Train to become a professional pilot with hands-on flight
                 experience.
               </p>
-              <button className="text-blue-600 font-semibold hover:underline">
+              <Link to="/programs/piloting" className="text-blue-600 font-semibold hover:underline">
                 Learn More
-              </button>
+              </Link>
             </div>
           </div>
         </div>
