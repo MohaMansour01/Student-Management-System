@@ -8,6 +8,7 @@ import Business from './components/Programs/business'
 import Computer from './components/Programs/computer'
 import Engineering from './components/Programs/engineering'
 import Piloting from './components/Programs/piloting'
+import Admin from './components/Admin/Admin'
 
 function App() {
 
@@ -23,6 +24,7 @@ function App() {
         <Route path='/computer' element={<Computer />} />
         <Route path='/engineering' element={<Engineering />} />
         <Route path='/piloting' element={<Piloting />} />
+        <Route path='/admin' element={<Admin />} />
       </Routes>
       </BrowserRouter>
     </>
