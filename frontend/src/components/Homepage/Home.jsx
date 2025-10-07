@@ -397,9 +397,9 @@ const Home = () => {
                 designed to provide foundational knowledge and hands-on
                 experience.
               </p>
-              <button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-3 rounded-md transition">
+              <Link to={'/application'} className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-3 rounded-md transition">
                 Apply Now
-              </button>
+              </Link>
             </div>
             <div className="bg-white p-8 rounded-lg shadow hover:shadow-lg transform hover:-translate-y-1 transition">
               <h3 className="text-2xl font-bold mb-4">Postgraduate Programs</h3>
@@ -408,9 +408,9 @@ const Home = () => {
                 specialized training, research opportunities, and professional
                 development.
               </p>
-              <button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-3 rounded-md transition">
+              <Link to={'/application'} className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-3 rounded-md transition">
                 Apply Now
-              </button>
+              </Link>
             </div>
           </div>
 

@@ -129,7 +129,7 @@ const Art = () => {
               onClick={() => scrollToSection(requirementsRef)}
               className="bg-blue-600 hover:bg-blue-700 text-white px-12 py-3 rounded-md font-semibold"
             >
-              Apply Now
+              Go To Apply
             </button>
           </div>
         </div>
@@ -390,9 +390,9 @@ const Art = () => {
         </div>
 
         <div className="flex justify-center items-center mt-[5%]">
-          <button className="text-white bg-sky-800 px-6 py-4 rounded-[5px]">
+          <Link to={'/application'} className="text-white bg-sky-800 px-6 py-4 rounded-[5px]">
             Apply Now
-          </button>
+          </Link>
         </div>
       </section>
 

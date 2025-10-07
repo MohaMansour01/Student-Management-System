@@ -9,6 +9,8 @@ import Computer from './components/Programs/computer'
 import Engineering from './components/Programs/engineering'
 import Piloting from './components/Programs/piloting'
 import Admin from './components/Admin/Admin'
+import Application from './components/Application/Application'
+import Students from './components/Admin/students/Students'
 
 function App() {
 
@@ -25,6 +27,9 @@ function App() {
         <Route path='/engineering' element={<Engineering />} />
         <Route path='/piloting' element={<Piloting />} />
         <Route path='/admin' element={<Admin />} />
+        <Route path='/application' element={<Application />} />
+        <Route path='/students' element={<Students />} />
+
       </Routes>
       </BrowserRouter>
     </>

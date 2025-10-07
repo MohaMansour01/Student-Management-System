@@ -318,9 +318,9 @@ const Computer = () => {
           </div>
         </div>
         <div className="flex justify-center items-center mt-[5%]">
-          <button className="text-white bg-sky-800 px-6 py-4 rounded-[5px]">
+          <Link to={'/application'} className="text-white bg-sky-800 px-6 py-4 rounded-[5px]">
             Apply Now
-          </button>
+          </Link>
         </div>
       </section>
 

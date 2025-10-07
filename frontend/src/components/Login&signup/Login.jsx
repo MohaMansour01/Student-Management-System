@@ -16,7 +16,7 @@ const Login = () => {
         ${fadeIn ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
       >
         <h1 className="text-3xl sm:text-4xl mb-6 font-bold text-gray-800">
-          Student Login
+          Login System
         </h1>
 
         <div className="w-full mb-5">
@@ -24,7 +24,7 @@ const Login = () => {
             htmlFor="studentid"
             className="font-semibold text-gray-700 block mb-2 text-left"
           >
-            Student ID
+            User ID
           </label>
           <input
             type="number"
